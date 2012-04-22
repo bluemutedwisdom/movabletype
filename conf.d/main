@@ -1,0 +1,32 @@
+#!/bin/bash -ex
+
+PACKAGE=movabletype-opensource
+WEBROOT=/var/www/movabletype
+
+# reconfigure movabletype
+/etc/init.d/mysql start
+
+debconf-set-selections << EOF
+$PACKAGE $PACKAGE/dbconfig-reinstall boolean true
+EOF
+DEBIAN_FRONTEND=noninteractive dpkg-reconfigure $PACKAGE
+
+/etc/init.d/mysql stop
+
+# setup apache configuration
+rm -f /etc/apache2/conf.d/$PACKAGE
+touch /etc/apache2/conf.d/$PACKAGE
+ln -s /etc/$PACKAGE/apache.conf /etc/apache2/sites-available/movabletype
+a2dissite default
+a2ensite movabletype
+
+# setup webroot for movabletype multiblog configuration
+mkdir -p $WEBROOT
+chown www-data:www-data $WEBROOT
+ln -s /usr/lib/cgi-bin $WEBROOT/cgi-bin
+ln -s /usr/share/movabletype/static $WEBROOT/mt-static
+
+# configure tkl-webcp
+cp -a /var/www/images/* $WEBROOT/images
+cp -a /var/www/{js,css} $WEBROOT
+rm -rf /var/www/{js,css,images}

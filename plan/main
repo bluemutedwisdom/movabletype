@@ -1,0 +1,7 @@
+#include <turnkey/base>
+#include <turnkey/lamp>
+
+movabletype-opensource*
+movabletype-plugin-core
+
+libdbd-mysql-perl
