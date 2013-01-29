@@ -1,7 +1,12 @@
 #include <turnkey/base>
 #include <turnkey/lamp>
 
-movabletype-opensource*
+movabletype-opensource
+libarchive-tar-perl         /* movabletype-opensource recommends */
+libarchive-zip-perl         /* movabletype-opensource recommends */
+libsoap-lite-perl           /* movabletype-opensource recommends */
+perlmagick                  /* movabletype-opensource recommends */
+
 movabletype-plugin-core
 
 libdbd-mysql-perl
