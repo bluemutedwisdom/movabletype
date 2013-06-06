@@ -1,6 +1,6 @@
 turnkey-movabletype-12.1 (1) turnkey; urgency=low
 
-  * Latest version of MovableType will be installed at build time.
+  * Latest Debian Squeeze package version of MovableType.
 
   * Added phpsh (interative shell for PHP) and php5-cli (generically useful).
 
